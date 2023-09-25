@@ -38,29 +38,29 @@
     "@babel/runtime": "7.x"
   },
   "dependencies": {
-    "@tkey/common-types": "^10.1.0",
-    "@tkey/service-provider-base": "^10.1.0",
-    "@web3auth/single-factor-auth": "^6.5.0",
+    "@tkey/common-types": "^11.0.2",
+    "@tkey/service-provider-base": "^11.0.2",
+    "@web3auth/single-factor-auth": "^7.0.1",
     "bn.js": "^5.2.1"
   },
   "devDependencies": {
-    "@babel/register": "^7.22.5",
-    "@babel/runtime": "^7.22.10",
-    "@toruslabs/config": "^2.0.1",
-    "@toruslabs/eslint-config-typescript": "^3.0.0",
-    "@toruslabs/torus-scripts": "^5.0.2",
-    "@types/assert": "^1.5.6",
-    "@types/bn.js": "^5.1.1",
+    "@babel/register": "^7.22.15",
+    "@babel/runtime": "^7.23.1",
+    "@toruslabs/config": "^2.0.2",
+    "@toruslabs/eslint-config-typescript": "^3.0.1",
+    "@toruslabs/torus-scripts": "^5.0.5",
+    "@types/assert": "^1.5.7",
+    "@types/bn.js": "^5.1.2",
     "@types/node": "^20",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
-    "eslint": "^8.46.0",
+    "eslint": "^8.50.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
+    "lint-staged": "^14.0.1",
     "nyc": "^15.1.0",
-    "prettier": "^3.0.1",
+    "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "bugs": {
     "url": "https://github.com/tkey/tkey/issues"

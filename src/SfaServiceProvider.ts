@@ -1,7 +1,9 @@
-import { SfaServiceProviderArgs, StringifiedType } from "@tkey/common-types";
+import { StringifiedType } from "@tkey/common-types";
 import { ServiceProviderBase } from "@tkey/service-provider-base";
 import { LoginParams, PrivateKeyProvider, Web3Auth, Web3AuthOptions } from "@web3auth/single-factor-auth";
 import BN from "bn.js";
+
+import { SfaServiceProviderArgs } from "./interfaces";
 
 class SfaServiceProvider extends ServiceProviderBase {
   web3AuthOptions: Web3AuthOptions;
