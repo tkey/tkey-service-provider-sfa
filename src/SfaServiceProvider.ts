@@ -1,4 +1,4 @@
-import { StringifiedType } from "@tkey/common-types";
+import { type StringifiedType } from "@tkey/common-types";
 import { ServiceProviderBase } from "@tkey/service-provider-base";
 import { NodeDetailManager } from "@toruslabs/fetch-node-details";
 import Torus, { keccak256 } from "@toruslabs/torus.js";

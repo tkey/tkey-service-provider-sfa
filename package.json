@@ -33,9 +33,7 @@
     "@babel/runtime": "7.x"
   },
   "dependencies": {
-    "@tkey/common-types": "^12.0.0",
     "@tkey/service-provider-base": "^12.0.0",
-    "@toruslabs/constants": "^13.0.3",
     "@toruslabs/fetch-node-details": "^13.0.3",
     "@toruslabs/torus.js": "^12.0.1",
     "bn.js": "^5.2.1"
@@ -43,7 +41,9 @@
   "devDependencies": {
     "@babel/register": "^7.22.15",
     "@babel/runtime": "^7.23.2",
+    "@tkey/common-types": "^12.0.0",
     "@toruslabs/config": "^2.0.2",
+    "@toruslabs/constants": "^13.0.3",
     "@toruslabs/eslint-config-typescript": "^3.0.2",
     "@toruslabs/torus-scripts": "^5.0.6",
     "@types/assert": "^1.5.9",

@@ -1,5 +1,5 @@
 import { type ServiceProviderArgs } from "@tkey/common-types";
-import { TORUS_NETWORK_TYPE } from "@web3auth/single-factor-auth";
+import { type TORUS_NETWORK_TYPE } from "@toruslabs/constants";
 
 export interface Web3AuthOptions {
   clientId: string;
