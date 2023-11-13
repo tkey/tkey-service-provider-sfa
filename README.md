@@ -20,8 +20,7 @@ import SFAServiceProvider from '@tkey/service-provider-sfa';
 
 const web3AuthOptions: any = {
   clientId, // Get your Client ID from Web3Auth Dashboard
-  chainConfig,
-  web3AuthNetwork: 'testnet', // ["cyan", "testnet", "sapphire-devnet", "sapphire-mainnet"]
+  web3AuthNetwork: 'testnet', // ["cyan", "testnet", "mainnet", "aqua", "sapphire_devnet", "sapphire_mainnet"]
 };
 
 const serviceProvider = new SFAServiceProvider({web3AuthOptions});
