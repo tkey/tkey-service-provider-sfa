@@ -9,21 +9,21 @@ import { AggregateVerifierParams, LoginParams, SfaServiceProviderArgs, Web3AuthO
 class SfaServiceProvider extends ServiceProviderBase {
   web3AuthOptions: Web3AuthOptions;
 
-  web3AuthInstance: Torus;
+  authInstance: Torus;
 
   private nodeDetailManagerInstance: NodeDetailManager;
 
   constructor({ enableLogging = false, postboxKey, web3AuthOptions }: SfaServiceProviderArgs) {
     super({ enableLogging, postboxKey });
-
     this.web3AuthOptions = web3AuthOptions;
-    this.web3AuthInstance = new Torus({
+    this.authInstance = new Torus({
       clientId: web3AuthOptions.clientId,
       enableOneKey: true,
       network: web3AuthOptions.network,
     });
+    Torus.enableLogging(enableLogging);
     this.serviceProviderName = "SfaServiceProvider";
-    this.nodeDetailManagerInstance = new NodeDetailManager({ network: web3AuthOptions.network });
+    this.nodeDetailManagerInstance = new NodeDetailManager({ network: web3AuthOptions.network, enableLogging });
   }
 
   static fromJSON(value: StringifiedType): SfaServiceProvider {
@@ -45,10 +45,10 @@ class SfaServiceProvider extends ServiceProviderBase {
     const { torusNodeEndpoints, torusNodePub, torusIndexes } = await this.nodeDetailManagerInstance.getNodeDetails(verifierDetails);
 
     if (params.serverTimeOffset) {
-      this.web3AuthInstance.serverTimeOffset = params.serverTimeOffset;
+      this.authInstance.serverTimeOffset = params.serverTimeOffset;
     }
     // Does the key assign
-    await this.web3AuthInstance.getPublicAddress(torusNodeEndpoints, torusNodePub, { verifier, verifierId });
+    if (this.authInstance.isLegacyNetwork) await this.authInstance.getPublicAddress(torusNodeEndpoints, torusNodePub, { verifier, verifierId });
 
     let finalIdToken = idToken;
     let finalVerifierParams = { verifier_id: verifierId };
@@ -69,7 +69,7 @@ class SfaServiceProvider extends ServiceProviderBase {
       finalVerifierParams = aggregateVerifierParams;
     }
 
-    const torusKey = await this.web3AuthInstance.retrieveShares(torusNodeEndpoints, torusIndexes, verifier, finalVerifierParams, finalIdToken);
+    const torusKey = await this.authInstance.retrieveShares(torusNodeEndpoints, torusIndexes, verifier, finalVerifierParams, finalIdToken);
     const postboxKey = Torus.getPostboxKey(torusKey);
     this.postboxKey = new BN(postboxKey, 16);
     return this.postboxKey;
