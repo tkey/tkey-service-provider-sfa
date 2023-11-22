@@ -1,7 +1,7 @@
 import { type StringifiedType } from "@tkey/common-types";
 import { ServiceProviderBase } from "@tkey/service-provider-base";
 import { NodeDetailManager } from "@toruslabs/fetch-node-details";
-import Torus, { keccak256 } from "@toruslabs/torus.js";
+import Torus, { keccak256, TorusKey } from "@toruslabs/torus.js";
 import BN from "bn.js";
 
 import { AggregateVerifierParams, LoginParams, SfaServiceProviderArgs, Web3AuthOptions } from "./interfaces";
@@ -10,6 +10,8 @@ class SfaServiceProvider extends ServiceProviderBase {
   web3AuthOptions: Web3AuthOptions;
 
   authInstance: Torus;
+
+  public torusKey: TorusKey;
 
   private nodeDetailManagerInstance: NodeDetailManager;
 
@@ -27,14 +29,18 @@ class SfaServiceProvider extends ServiceProviderBase {
   }
 
   static fromJSON(value: StringifiedType): SfaServiceProvider {
-    const { enableLogging, postboxKey, web3AuthOptions, serviceProviderName } = value;
+    const { enableLogging, postboxKey, web3AuthOptions, serviceProviderName, torusKey } = value;
     if (serviceProviderName !== "SfaServiceProvider") return undefined;
 
-    return new SfaServiceProvider({
+    const sfaSP = new SfaServiceProvider({
       enableLogging,
       postboxKey,
       web3AuthOptions,
     });
+
+    sfaSP.torusKey = torusKey;
+
+    return sfaSP;
   }
 
   async connect(params: LoginParams): Promise<BN> {
@@ -70,6 +76,7 @@ class SfaServiceProvider extends ServiceProviderBase {
     }
 
     const torusKey = await this.authInstance.retrieveShares(torusNodeEndpoints, torusIndexes, verifier, finalVerifierParams, finalIdToken);
+    this.torusKey = torusKey;
     const postboxKey = Torus.getPostboxKey(torusKey);
     this.postboxKey = new BN(postboxKey, 16);
     return this.postboxKey;
